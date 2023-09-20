@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-
 
 @Entity
 @Table(name = "contacto")
@@ -22,16 +24,24 @@ public class Contacto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
+	
+	//@NotBlank(message = "no puede estar vacio") //puedo colocar el mensaje 2que yo quiera
+	@NotBlank
 	private String nombre;
-     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+
+	@PastOrPresent
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate fechaNacimiento;
+
+	@Size(max = 7)
 	private String celular;
 	private LocalDateTime fechaRegistro;
-
+	@Email
 	private String correo;
 
 	public Contacto() {
-		
+
 	}
 
 	public Contacto(Integer id, String nombre, LocalDate fechaNacimiento, String celular, LocalDateTime fechaRegistro,
@@ -92,9 +102,5 @@ public class Contacto {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
-	
-	
-	
-	
+
 }

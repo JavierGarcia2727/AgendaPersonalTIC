@@ -9,15 +9,30 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="container">
 
 	<div th:if="${msgExito != null}">[[${msgExito}]]</div>
 
-	<h1>Mis Contactos</h1>
+	<h3>Mis Contactos</h3>
+
+	<div class="alert alert-success alert-dismissible mt-3"
+		th:if="${msgExito ne null}">
+		[[${msgExito}]]
+		<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+	</div>
+
+
 	<div class="text-end">
-	<a href="/contacto/nuevo" class="btn btn-primary">Registrar Contacto</a>
-</div>
+		<a href="/contacto/nuevo" class="btn btn-primary"><i
+			class="fa fa-plus"></i> Registrar Contacto</a>
+	</div>
 	<table class="table table-hover">
 
 		<thead>
@@ -42,12 +57,18 @@
 				<td th:text="*{#temporals.format(fechaNacimiento, 'dd/MM/YYYY')}"></td>
 				<td th:text="*{celular}"></td>
 				<td th:text="${contacto.correo}"></td>
-
-
-
 				<td
 					th:text="*{#temporals.format(fechaRegistro, 'dd/MM/YYYY hh:mm a')}"></td>
-				<td><a href="">Editar</a> <a href="">Eliminar</a></td>
+
+
+
+				<td>
+				
+				<div class="btn-group btn-group-sm">
+				<a th:href="@{/contacto/editar/{id}(id=*{id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a> 
+				
+				<a th:href="@{/contacto/editar/{id}(id=*{id})}" class="btn btn-danger"><i
+						class="fa fa-trash"></i></a></div></td>
 
 			</tr>
 		</tbody>
