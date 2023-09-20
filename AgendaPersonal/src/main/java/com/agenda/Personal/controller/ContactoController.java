@@ -21,16 +21,23 @@ public class ContactoController {
 	@GetMapping("/index")
 	public String index(Model model) {
 		
-		System.out.println("################ 1 ###########################");
+
 		List<Contacto> contactos =  contactoRepository.findAll();
 
-		System.out.println("################ 2 ###########################");
+
 		model.addAttribute("contactos", contactos);
 
 		System.out.println("################ 3 ###########################");
 		return "index";
 	}
 	
+	@GetMapping("/nuevo")
+	public String nuevo(Model model) {
+		model.addAttribute("contacto", new Contacto());
+		
+		return "nuevo";
+		
+	}
 	
 	
 	

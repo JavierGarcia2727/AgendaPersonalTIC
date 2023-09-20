@@ -2,37 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="Utf-8">
-<title>Insert title here</title>
+<title>Inicio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="container">
 
 	<div th:if="${msgExito != null}">[[${msgExito}]]</div>
 
-	<h1>Hola Javi</h1>
-	<a href="/contacto/nuevo">nuevo contacto</a>
-
-	<table>
+	<h1>Mis Contactos</h1>
+	<div class="text-end">
+	<a href="/contacto/nuevo" class="btn btn-primary">Registrar Contacto</a>
+</div>
+	<table class="table table-hover">
 
 		<thead>
 			<tr>
 				<th>Id</th>
 				<th>Nombre</th>
+				<th>F.Nacimiento</th>
 				<th>Celular</th>
 				<th>Correo</th>
-				<th>F.Nacimiento</th>
+
 				<th>F.Registro</th>
+				<th></th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<tr th:each="contacto : ${contactos}">
-				<td th:text="${contacto.id}"></td>
-				<td th:text="${contacto.nombre}"></td>
-				<td th:text="${contacto.celular}"></td>
+			<tr th:each="contacto : ${contactos}" th:object="${contacto}">
+				<!-- Si utilizo th:object="${contacto}" puedo usar *
+			                                                               en vez de contacto  -->
+				<td th:text="*{id}"></td>
+				<td th:text="*{nombre}"></td>
+				<td th:text="*{#temporals.format(fechaNacimiento, 'dd/MM/YYYY')}"></td>
+				<td th:text="*{celular}"></td>
 				<td th:text="${contacto.correo}"></td>
 
-				<td th:text="${contacto.fechaNacimiento}"></td>
-				<td th:text="${contacto.fechaRegistro}"></td>
+
+
+				<td
+					th:text="*{#temporals.format(fechaRegistro, 'dd/MM/YYYY hh:mm a')}"></td>
+				<td><a href="">Editar</a> <a href="">Eliminar</a></td>
+
 			</tr>
 		</tbody>
 
