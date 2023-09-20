@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="Utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:if="${msgExito != null}">[[${msgExito}]]</div>
+
+	<h1>Hola Javi</h1>
+	<a href="/contacto/nuevo">nuevo contacto</a>
+
+	<table>
+
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Celular</th>
+				<th>Correo</th>
+				<th>F.Nacimiento</th>
+				<th>F.Registro</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="contacto : ${contactos}">
+				<td th:text="${contacto.id}"></td>
+				<td th:text="${contacto.nombre}"></td>
+				<td th:text="${contacto.celular}"></td>
+				<td th:text="${contacto.correo}"></td>
+
+				<td th:text="${contacto.fechaNacimiento}"></td>
+				<td th:text="${contacto.fechaRegistro}"></td>
+			</tr>
+		</tbody>
+
+
+
+
+	</table>
+
+</body>
+</html>
