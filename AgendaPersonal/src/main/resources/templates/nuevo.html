@@ -13,9 +13,35 @@
 <body class="container">
 
 	<h3>Nuevo Contacto</h3>
-	
-	
 
-	
+	<form th:action="@{/contacto/nuevo}" th:object="${contacto}"
+		method="POST" novalidate>
+
+		<div class="mb-2">
+			<label for="nombre">Nombre</label> <input id="nombre" th:field="*{nombre}" type="text"
+				placeholder="Nombre" autoComplete="off">
+		</div>
+
+		<div class="mb-2">
+			<label for="fechaNacimiento">F. nacimiento</label> <input
+				id="fechaNacimiento" th:field="*{fechaNacimiento}" type="date" placeholder="Fecha nacimiento" >
+		</div>
+
+
+		<div class="mb-2">
+			<!-- se usa type="tel" exclusivo de telefono -->
+			<label for="celular">Celular</label> <input id="celular" th:field="*{celular}" type="tel"
+				placeholder="celular" autoComplete="off">
+		</div>
+		<div class="mb-2">
+			<label for="correo">Correo</label> <input id="correo" th:field="*{correo}" type="text"
+				placeholder="correo" autoComplete="off">
+		</div>
+		
+		
+		<button class="btn btn-primary">Crear Contacto</button>
+	</form>
+
+
 </body>
 </html>

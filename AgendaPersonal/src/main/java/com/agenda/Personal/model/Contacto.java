@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 @Entity
@@ -21,7 +23,7 @@ public class Contacto {
 	@Column(name = "id")
 	private Integer id;
 	private String nombre;
-
+     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate fechaNacimiento;
 	private String celular;
 	private LocalDateTime fechaRegistro;
