@@ -67,8 +67,12 @@
 				<div class="btn-group btn-group-sm">
 				<a th:href="@{/contacto/editar/{id}(id=*{id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a> 
 				
-				<a th:href="@{/contacto/editar/{id}(id=*{id})}" class="btn btn-danger"><i
-						class="fa fa-trash"></i></a></div></td>
+				<button class="btn btn-danger" onclick="eliminarContacto(this)"><i
+						class="fa fa-trash"></i></button>
+						
+						<form th:action="@{/contacto/eliminar/{id}(id=*{id})}" method="post"></form>
+						
+						</div></td>
 
 			</tr>
 		</tbody>
@@ -77,6 +81,29 @@
 
 
 	</table>
+<script type="text/javascript">
 
+
+
+function eliminarContacto(element){
+	
+	//Resive el elemento boton al darle onclick y nextElementSibling nos ayuda a posesionarse en 
+	//el siguiente elemento despues de ese boton q seria el formulario y al darle subrmit ejecuta el formiulario
+	//podria enviar el id como actualizar pero por seguridad es mejor usar un pos que un get en actualizar
+	
+	let ok = confirm('¿Estas seguro de eliminar este registro?');
+	//console.log('respuesta', ok);
+	if(ok){// si ok es verdadero da paso o enctra ene l if 
+		
+		element.nextElementSibling.submit();	
+	}
+	
+	
+}
+
+
+
+
+</script>
 </body>
 </html>

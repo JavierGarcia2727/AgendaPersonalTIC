@@ -69,14 +69,14 @@ public class ContactoController {
 		System.out.println("################ editar su id es ####### "+id);
 
 		Contacto contacto = contactoRepository.findById(id).orElse(null);
-
+		System.out.println("xxxxxxxxxxxxxxx "+contacto.getId());
 		model.addAttribute("contacto", contacto);
 
-		return "nuevo";
+		return "Actualizar";
 
 	}
 
-	@PostMapping("/actualizar/{id}")
+	/*@PostMapping("/actualizar/{id}")
 	public String actualizar(@Validated Contacto contacto, BindingResult bindingResult, RedirectAttributes mensaje,
 			Model model, @PathVariable Integer id) {
 		System.out.println("################ actualizar ####### "+id);
@@ -99,6 +99,37 @@ public class ContactoController {
 		mensaje.addFlashAttribute("msgExito", "El contacto se ha actualizado correctamente");
 
 		return "redirect:/contacto/index";
+	}*/
+	@PostMapping("/actualizar")
+	public String actualizar(@Validated Contacto contacto, BindingResult bindingResult, RedirectAttributes mensaje,
+			Model model) {
+		System.out.println("================== actualizar ####### "+contacto.getId());
+		
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("contacto", contacto);
+
+			return "Actualizar";
+
+		}
+		contactoRepository.save(contacto);
+
+		mensaje.addFlashAttribute("msgExito", "El contacto se ha actualizado correctamente");
+
+		return "redirect:/contacto/index";
 	}
+	
+	@PostMapping("/eleminar/{id}")
+	public String eliminar(@PathVariable Integer id, RedirectAttributes mensaje) {
+	
+				
+		Contacto contacto = contactoRepository.findById(id).orElse(null);
+		contactoRepository.delete(contacto);
+
+		mensaje.addFlashAttribute("msgExito", "El contacto se ha elimino correctamente");
+
+		return "redirect:/contacto/index";
+	}
+	
 
 }

@@ -34,7 +34,7 @@ public class Contacto {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate fechaNacimiento;
 
-	@Size(max = 7)
+	@Size(max = 9)
 	private String celular;
 	private LocalDateTime fechaRegistro;
 	@Email

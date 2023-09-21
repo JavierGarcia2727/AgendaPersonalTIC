@@ -21,11 +21,19 @@
 </head>
 <body class="container">
 
-	<h3>Nuevo Contacto</h3>
+	<h3>Editar Contacto</h3>
 
-	<form th:action="@{/contacto/crear}" th:object="${contacto}"
+
+	<h3>[[${contacto.id ne null ? 'Editar' : 'Crear'}]] Contacto</h3>
+
+
+
+	<form th:action="@{/contacto/actualizar}" th:object="${contacto}"
 		method="POST" novalidate>
-
+ 
+ <input type="hidden" id="id" name="id" th:field="*{id}">
+ 
+ 
 		<div class="form-group">
 			<label for="nombre">Nombre</label> <input id="nombre"
 				th:field="*{nombre}" type="text" class="form-control"
@@ -59,7 +67,9 @@
 
        <a href="/contacto/index" class="btn btn-light me-2"> Cencelar</a>
 
-		<button class="btn btn-primary">Crear Contacto</button> 
+		<button class="btn btn-primary">[[${contacto.id ne null ? 'Editar' : 'Crear'}]] Contacto</button> 
+		<!-- [[${contacto.id ne null ? 'Editar' : 'Crear'}]] sirve para colocar editar o crear pero dependera
+		 si contacto en su id ya tiene un 	valor o aun es nulo -->
 	</form>
 
 
