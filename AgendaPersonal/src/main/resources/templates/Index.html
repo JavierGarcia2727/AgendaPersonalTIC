@@ -15,7 +15,23 @@
 	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="container">
+<body class="container py-5">
+
+
+	<div class="p-5 bg-light rounded shadow mb-5"
+		style="background: url('/mello.svg') no-repeat right; background-size: contain">
+
+
+		<h1 class="text-primary display-5">Bien Venido a mi Agenda</h1>
+		<p class="fw-bold mt-3">Con esta aplicacion podras gestionar tu
+			agenda virtual</p>
+
+
+		<p>consulta, crea. actualiza o elimana tus contactos de forma
+			facil y segura.</p>
+
+	</div>
+
 
 	<div th:if="${msgExito != null}">[[${msgExito}]]</div>
 
@@ -33,19 +49,20 @@
 		<a href="/contacto/nuevo" class="btn btn-primary"><i
 			class="fa fa-plus"></i> Registrar Contacto</a>
 	</div>
-	
-	<form action="" method="get">
-	<div class="row">
-	<div class="col-lg-3 col-md-4">
-	<div class="input-group mb-3">
-		<button class="btn btn-primary" type="submit"
-			id="button-addon1"><i class="fa fa-search"></i></button>
-		<input type="text" name="busqueda" class="form-control" placeholder="Buscar Por nombre"
-			>
-	</div>
-	</div>
-	</div>
-</form>
+
+	<form action="" method="get" autoComplete="off">
+		<div class="row">
+			<div class="col-lg-3 col-md-4">
+				<div class="input-group mb-3">
+					<button class="btn btn-primary" type="submit" id="button-addon1">
+						<i class="fa fa-search"></i>
+					</button>
+					<input type="text" name="busqueda" class="form-control"
+						placeholder="Buscar Por nombre" th:value="${param.busqueda}">
+				</div>
+			</div>
+		</div>
+	</form>
 	<table class="table table-hover">
 
 		<thead>
