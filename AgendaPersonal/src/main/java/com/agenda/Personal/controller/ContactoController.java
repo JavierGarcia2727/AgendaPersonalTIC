@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.agenda.Personal.model.Contacto;
 import com.agenda.Personal.repository.ContactoRepository;
-
-import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
 
 @Controller
 @RequestMapping("/contacto")
@@ -44,11 +43,17 @@ public class ContactoController {
 
 	@GetMapping("/index")
 	public String index(
-			@PageableDefault(size = 3, sort = "fechaRegistro",
-			direction = Direction.DESC) Pageable pageable,
-			ModelMap model) {
+			@PageableDefault(size = 3, sort = "fechaRegistro", direction = Direction.DESC) Pageable pageable,
+			@RequestParam(required = false) String busqueda, ModelMap model) {
 
-		Page<Contacto> contactospage = contactoRepository.findAll(pageable);
+		Page<Contacto> contactospage;
+		if (busqueda != null && busqueda.trim().length() > 0) {
+
+			contactospage = contactoRepository.findByNombreContaining(busqueda, pageable);
+		} else {
+			contactospage = contactoRepository.findAll(pageable);
+
+		}
 
 		model.addAttribute("contactospage", contactospage);
 
